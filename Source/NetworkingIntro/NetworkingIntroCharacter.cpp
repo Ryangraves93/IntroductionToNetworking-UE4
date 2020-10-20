@@ -140,14 +140,6 @@ void ANetworkingIntroCharacter::AttemptToSpawnBomb()
 			ServerSpawnBomb();
 		}
 		else SpawnBomb();
-
-		FDamageEvent DmgEvent;
-
-		if (HasAuthority())
-		{
-			ServerTakeDamage(25.f, DmgEvent, GetController(), this);
-		}
-		else TakeDamage(25.f, DmgEvent, GetController(), this);
 	}
 }
 
@@ -155,6 +147,13 @@ void ANetworkingIntroCharacter::SpawnBomb()
 {
 	BombCount--;
 	UpdateCharText();
+	6
+	FActorSpawnParameters SpawnParameters;
+	SpawnParameters.Instigator = this;
+	SpawnParameters.Owner = GetController();
+
+	//Spawn the bomb
+	GetWorld()->SpawnActor<ABomb>(BombActorBp, GetActorLocation() + GetActorForwardVector() * 200, GetControlRotation(), SpawnParameters);
 }
 
 void ANetworkingIntroCharacter::ServerSpawnBomb_Implementation()

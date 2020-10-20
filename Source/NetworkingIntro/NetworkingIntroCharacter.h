@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Components/TextRenderComponent.h"
+#include "Bomb.h"
 #include "NetworkingIntroCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -48,6 +49,10 @@ public:
 	//Text render component - used instead of UMG for convenience sake
 	UPROPERTY(VisibleAnywhere)
 	UTextRenderComponent* CharText;
+
+	//Bomb blueprint
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ABomb> BombActorBp;
 protected:
 
 	/** Resets HMD orientation in VR. */
